@@ -1,0 +1,22 @@
+{% extends 'core.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<div class="row">
+<div class="col-sm-6 col-sm-offset-3"> 
+	<h1>{{ title }}</h1>
+	{% if confirmation %}
+		<p>{{ confirmation }}</p>
+	{% endif %}
+
+	{% if form %}
+		<form method='POST' action=''> <!--POST data, action="": already contacturl.--> 
+ 		{% csrf_token %}
+ 		{{ form|crispy }}<!--{{ form.as_p }}displays the form as <p> in 'uni_form' template -->
+ 		<input type="Submit" value='submit' class='btn btn-default' />
+		</form>
+	{% endif %}
+</div>
+</div>
+
+{% endblock %}

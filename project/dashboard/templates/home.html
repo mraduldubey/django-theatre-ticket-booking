@@ -1,0 +1,88 @@
+{% extends 'core.html' %}
+{% load staticfiles %}
+{% block styletags %}
+<style>
+.jumbotron{
+	text-align: center;
+}
+</style>
+{% endblock %}
+
+{% block jumbotron %}
+   <!-- Carousel
+    ================================================== -->
+    <div id="myCarousel" class="carousel slide" data-ride="carousel">
+      <!-- Indicators -->
+      <ol class="carousel-indicators">
+        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+        <li data-target="#myCarousel" data-slide-to="1"></li>
+        <li data-target="#myCarousel" data-slide-to="2"></li>
+      </ol>
+      <div class="carousel-inner" role="listbox">
+        <div class="item active">
+          <img class="first-slide" src="{% static 'img/cam.jpg' %}" alt="First slide">
+          <div class="container">
+            <div class="carousel-caption">
+            </div>
+          </div>
+        </div>
+        <div class="item">
+          <img class="second-slide" src="{% static 'img/movie.jpg' %}" alt="Second slide" width:"700" height:300>
+          <div class="container">
+          </div>
+        </div>
+      </div>
+      <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+      </a>
+      <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+      </a>
+    </div><!-- /.carousel -->
+{% endblock %}
+
+{% block content %} <!--main block is usually called content-->
+<div class="container">
+      <!-- Example row of columns -->
+      <div class="row">
+        <div class="col-md-4">
+          <h2>Waves Theatre</h2>
+          <p>Waves Theatre is the leading theatre in the city. Donate to our Theatre Mentorship Program.' </p>
+          <p><a class="btn btn-danger" href="{% url 'checkout' %}"role="button">Donate to Theatres</a></p>
+        </div>
+        <div class="col-md-4">
+         <a href="#"><img src="{% static 'img/1.png' %}" class='img-responsive' alt="Kolkata"/></a>
+       </div>
+
+        <div class="col-md-4">
+        {% if request.user.is_authenticated %}
+        <h3>Hello {{ request.user }}</h3>
+        {% else %}
+         <form class="login" method="POST" action="/accounts/login/">
+         {% csrf_token %}
+
+
+        <!--this whole div copied from rendered login page I developed earlier to integrate login on homepage.-->
+<div id="div_id_login" class="form-group"> <label for="id_login" class="control-label  requiredField">
+                Login<span class="asteriskField">*</span> </label> <div class="controls "> <input autofocus="autofocus" class="textinput textInput form-control" id="id_login" name="login" placeholder="Username or e-mail" type="text" required=""> </div> </div> <div id="div_id_password" class="form-group"> <label for="id_password" class="control-label  requiredField">
+                Password<span class="asteriskField">*</span> </label> <div class="controls "> <input class="textinput textInput form-control" id="id_password" name="password" placeholder="Password" type="password" required=""> </div> </div> <div class="form-group"> <div id="div_id_remember" class="checkbox"> <label for="id_remember" class=""> <input class="checkboxinput" id="id_remember" name="remember" type="checkbox">
+                    Remember Me
+                </label> </div> </div>
+
+  <button class="primaryAction btn btn-primary" type="submit">Sign In</button>
+  <a class="button secondaryAction btn" href="{% url 'account_signup' %}">Or SignUp</a>
+  <a class="button secondaryAction" href="{% url 'account_reset_password' %}">Forgot Password?</a> <!--from allauth -->
+</form>
+{% endif %}
+        </div>
+      </div>
+
+      <hr>
+
+      <footer>
+        <p>© 2016 Company, Inc.</p>
+      </footer>
+    </div>
+{% endblock %}

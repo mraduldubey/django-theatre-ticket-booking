@@ -1,0 +1,44 @@
+<!-- Fixed navbar -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Wave Theatres</a>
+        </div>
+
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+          {% url 'home' as home %} <!--assigning variables-->
+          {% url 'booking' as booking %}
+          {% url 'contact' as contact %}
+          {%url 'booking' as booking %}
+            <li {% if request.path == home %} class="active" {% endif %}> <a href="{% url 'home' %}">Home</a> </li>
+            <li {% if request.path == booking %} class="active" {% endif %}> <a href="{% url 'booking' %}">Booking</a> </li>
+            <li {% if request.path == contact %} class="active" {% endif %}> <a href="{% url 'contact' %}">Contact</a> </li>
+
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Account <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+      <!--following url names like 'account_login' use the allauth names as in their documentation-->
+              {% if not request.user.is_authenticated %}
+                <li><a href="{% url 'account_login' %}">Login</a></li>
+                <li><a href="{% url 'account_signup' %}">SignUp</a></li>
+              {% else %}
+                <li><a href="{%url 'account_logout' %}">LogOut</a></li>
+              {% endif %}
+                <li role="separator" class="divider"></li>
+                <li class="dropdown-header">Nav header</li>
+                <li><a href="#">Separated link</a></li>
+                <li><a href="#">One more separated link</a></li>
+              </ul>
+            </li>
+
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>

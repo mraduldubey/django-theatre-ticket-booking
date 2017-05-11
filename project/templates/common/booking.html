@@ -1,0 +1,79 @@
+{% extends "common/base.html" %}
+{% block title %}
+    <title>BoxOffice | Home</title>
+{% endblock %}
+{% block content %}
+    <div id="myCarousel" class="carousel slide" data-ride="carousel">
+      <!-- Indicators -->
+      <ol class="carousel-indicators">
+        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+        <li data-target="#myCarousel" data-slide-to="1" class=""></li>
+        <li data-target="#myCarousel" data-slide-to="2" class=""></li>
+      </ol>
+      <div class="carousel-inner" role="listbox">
+      {% for top in top_movie %}
+        {% if forloop.counter == 1 %}
+        <div class="item active">
+        {% else %}
+        <div class="item">
+        {% endif %}
+          <img class="carousel-img" src="{{ MEDIA_URL }}/media/{{ top.image }}" alt="First slide">
+          <div class="container">
+            <div class="carousel-caption">
+              <h1>{{ top.name }}</h1>
+              <p>{{ top.cast }}</p>
+              <p>
+                <a class="btn btn-lg btn-primary" onclick="watchTrailer('{{ top.name }}','{{ top.trailer }}')" role="button">Watch Trailer</a>
+                <a class="btn btn-lg btn-primary" href="{% url 'movie_details' top.id %}" role="button">Book Now</a>
+              </p>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+      <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+      </a>
+      <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+      </a>
+    </div>
+
+    <div class="jumbotron">
+      <div class="text-center">
+        <h2>Now Showing</h2>
+      </div>
+      <div class="row">
+      {% for movie in movie_list %}
+        <div class="col-sm-4">
+          <div class="thumbnail">
+            <img src="{{ MEDIA_URL }}/media/{{ movie.image }}" alt="{{ movie.name }}">
+            <div class="caption">
+              <h3><a href="{% url 'movie_details' movie.id %}">{{ movie.name }}</a></h3>
+              <p>{{ movie.cast }}</p>
+              <p>{{ movie.language }} | {{ movie.certificate }}</p>
+              <p><a class="btn btn-default" onclick="watchTrailer('{{ movie.name }}','{{ movie.trailer }}')" role="button">Watch Trailer</a> <a class="btn btn-primary" href="{% url 'movie_details' movie.id %}" role="button">Book Now</a></p>
+            </div>
+          </div>
+        </div>
+      {% if forloop.counter|divisibleby:3 %}
+      </div>
+      {% if forloop.counter != movie_list|length %}
+      <div class="row">
+      {% endif %}
+      {% endif %}
+      {% endfor %}
+    </div>
+    <script type="text/javascript">
+    	$('.carousel').carousel({
+  			interval: 2500
+		});
+    function watchTrailer(windowName,url) {
+       newwindow=window.open(url,windowName,'height=700,width=700');
+       if (window.focus) {newwindow.focus()}
+       return false;
+     }
+    </script>
+{% endblock %}

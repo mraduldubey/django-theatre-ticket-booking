@@ -1,0 +1,27 @@
+{% extends "common/base.html" %}
+{% load crispy_forms_tags %}
+{% block title %}
+    <title>WavesTheatre | Reserve Seats</title>
+{% endblock %}
+
+{% block content %}
+
+	<h1>Reserve Seats</h1>
+	<h2>{{ show_info }}</h2>
+	<div class="seatDiv">
+		<div class="seatArray">
+		</div>
+		<div class="seatForm">
+			<form method="post" action="{% url 'payment_gateway' %}">
+				{% csrf_token %}
+				{{ form|crispy }}
+
+        {% csrf_token %}
+        {{ form2|crispy }}
+				<input type="hidden" name="show_id" id="show_id" value="{{ show_info.id }}" readonly />
+				<button type="submit">Confirm</button>
+			</form>
+		</div>
+	</div>
+
+{% endblock %}

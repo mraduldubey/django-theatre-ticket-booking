@@ -1,0 +1,25 @@
+{% extends "common/base.html" %}
+{% load bootstrap3 %}
+{% block content %}
+        {% if registered %}
+        <em>Thank you for registering!</em>
+        <a href="/">Return to the homepage.</a><br>
+        {% else %}
+
+        <div class="col-sm-6 col-sm-offset-3 forms">
+
+            <h1>Register with BoxOffice</h1>
+
+            <form id="user_form" method="post" action="" class="form">
+
+                {% csrf_token %}
+                {% bootstrap_form user_form %}
+                {% bootstrap_form profile_form %}
+                {% buttons %}
+                <input type="submit" name="submit" value="Register" class="btn btn-primary pull-right"/>
+                {% endbuttons %}
+            </form>
+
+        </div>
+        {% endif %}
+{% endblock %}

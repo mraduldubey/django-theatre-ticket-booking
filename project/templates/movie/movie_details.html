@@ -1,0 +1,77 @@
+{% extends "common/base.html" %}
+
+{% block title %}
+    <title>Waves Theatre | Movie Details</title>
+{% endblock %}
+
+{% block content %}
+
+
+<div class="media">
+  <div class="media-left">
+    <a href="#">
+      <img class="media-object" src="{{ MEDIA_URL }}/media/{{ movie_info.image }}" alt="{{ movie_info.name }}">
+    </a>
+    <a href="#" style="margin:15px;" onclick="watchTrailer('{{ movie_info.name }}','{{ movie_info.trailer }}')" role="button" class="btn btn-primary btn-sm">Watch Trailer</a>
+  </div>
+  <div class="media-body form-horizontal">
+    <h4 class="media-heading">{{ movie_info.name }}</h4>
+    <div class="form-group">
+      <label class="col-sm-2 control-label">Cast</label>
+      <div class="col-sm-10">
+      	<p class="form-control-static">{{ movie_info.cast }}</p>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-2 control-label">Director</label>
+      <div class="col-sm-10">
+      	<p class="form-control-static">{{ movie_info.director }}</p>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-2 control-label">Language</label>
+      <div class="col-sm-10">
+      	<p class="form-control-static">{{ movie_info.language }}</p>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-2 control-label">Runtime</label>
+      <div class="col-sm-10">
+      	<p class="form-control-static">{{ movie_info.run_length }}</p>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-2 control-label">Certificate</label>
+      <div class="col-sm-10">
+      	<p class="form-control-static">{{ movie_info.certificate }}</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Now Showing</h3>
+  </div>
+  <div class="panel-body">
+		{% for theatre in show_list %}
+		<div class="media">
+		  <div class="media-left">
+		    <a href="#">
+		      <img class="media-object" src="" alt="{{ theatre.0.theatre.name }}">
+		    </a>
+		  </div>
+		  <div class="media-body">
+		    <h4 class="media-heading"><a href="{% url 'home' %}">Waves Cinema</a></h4>
+		    <ul>
+		    {% for showtime in theatre %}
+		      <li><a href="{% url 'reserve_seat' showtime.id %}">{{ showtime.time|time:"h:i A" }}</a></li>
+		    {% endfor %}
+		    </ul>
+		  </div>
+		</div>
+		{% endfor %}
+  </div>
+</div>
+
+{% endblock %}
