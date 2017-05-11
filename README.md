@@ -1,2 +1,2 @@
 # django-theatre-ticket-booking
-Based on django_ecommerce webapp.
+Based on mD_ecommerce webapp: https://github.com/mraduldubey/mD-ecommerce.
