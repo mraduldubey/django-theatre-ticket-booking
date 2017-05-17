@@ -76,14 +76,14 @@ def payment_confirmation(request):
         book.save()
 
         booked_seat = []
-#some bug within 10 lines, in downwards direction.
+#removed bug of multiple booking of a seat.
         for seat in seats:
             print seat
             s = Seat.objects.get(no=seat, show=show)
             b = Booking.objects.get(pk=id)
             try:
                 #if seats not already booked:
-                sc = BookedSeat.objects.get(seat=s,booking=b)
+                sc = BookedSeat.objects.get(seat=s) #Search only by seat obj
             except:
                 #then book them:
                 booked = BookedSeat(seat=s, booking=b)
