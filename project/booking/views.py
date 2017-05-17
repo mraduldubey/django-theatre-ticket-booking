@@ -30,17 +30,15 @@ def payment_gateway(request):
         book_seat = []
         for each in seats:
             try:
+                #if seat not found in DB
                 s = Seat.objects.get(seat_type=seat_type,no=each, show=show)
             except:
+                #redirect to seatnotfound.html
                 return redirect('booking/seatnotfound.html')
 
             if Seat.objects.filter(seat_type=seat_type,no=each,show=show):
-                #return render(request,'booking/reserve_seat.html',{'show_info':show,'form':SeatForm(),'form2':SelectedSeatForm()})
                 s = Seat(no=each,seat_type=seat_type,show=show)
-                #if not BookedSeat.objects.filter(seat=s,booking=).exists()
                 book_seat.append(s)
-        #Write to db.
-        #Seat.objects.bulk_create(book_seat)
 
         form = BookingForm()
 
