@@ -1,0 +1,4 @@
+Django==1.11.2
+django-allauth==0.32.0
+django-crispy-forms==1.6.1
+stripe==1.59.0
