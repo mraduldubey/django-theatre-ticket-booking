@@ -3,11 +3,16 @@ Django based web app which implements ticket booking for multiple screen theatre
 
 ## Working Screenshots
 - Overview
-![Overview](Overview.gif?raw=true "Overview")
+
+![Overview](overview.gif?raw=true "Overview")
+
 - Authentication
+
 ![Authentication](authentication.gif?raw=true "Authentication")
+
 - Booking
-![Booking](booking.gif?raw=true "Booking")
+
+![Booking](booking-1.gif?raw=true "Booking")
 
 ## Installation Pre-requisites:
 To install following dependencies:
@@ -44,7 +49,7 @@ python manage.py runserver
 ## Important Notes:
 
 - Always ensure that DB has appropriate entries before you try to book tickets. Case in point, make sure you have added Seats for a show for the movie Today (system time).
-If not, go to: 127.0.0.1:8000/admin and add the seats and try again.
+If not, go to: ```127.0.0.1:8000/admin``` to add the seats and try again.
 
 - Features like Contact-Us and the Autoreply will work only when you have configured email settings of the admin in **project/ecommerce/settings.py**:
 ```
