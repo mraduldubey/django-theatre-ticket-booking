@@ -70,7 +70,7 @@ def autoreply(toaddr):
 
 ## Authors
 
-* **Mradul Dubey** - *webpage2kindle* - [MradulDubey](https://github.com/mraduldubey)
+* **Mradul Dubey** - *django-theatre-ticket-booking* - [MradulDubey](https://github.com/mraduldubey)
 
 ## License
 
